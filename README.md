@@ -23,9 +23,9 @@ does not uninstall the plugin; remove it through Calibre's plugin preferences af
 ## Updates and publishing
 
 - Repository: [yshalsager/calibre-kfxgen-mod](https://github.com/yshalsager/calibre-kfxgen-mod); default branch: **`calibre-kfxgen`**.
-- Enable Renovate and GitHub auto-merge. Require the **test** status check before merging. Renovate bumps
-  the Dockerfile's grouped version/checksum/source-commit pins and auto-merges passing kfxgen updates;
-  it also opens dependency update PRs.
+- Renovate checks before 05:00 Saturday (Africa/Cairo), groups non-major updates, and auto-merges passing
+  minor/patch/pin/digest updates after a three-day release age. Major updates stay manual. Keep GitHub
+  auto-merge enabled and **test** required. kfxgen's version/checksum/source-commit pins update together.
 - Pushes run the smoke test, then LinuxServer's reusable mod builder publishes amd64/arm64 images to GHCR
   using `GITHUB_TOKEN`. Set the package public after its first push. No PAT or registry password needed.
 - Tags follow the LS template: `calibre-kfxgen`, `calibre-kfxgen-v<version>`, and commit-qualified variants.

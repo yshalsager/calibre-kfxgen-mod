@@ -1,12 +1,20 @@
 {
-  "extends": ["config:recommended"],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended", ":rebaseStalePrs", "group:allNonMajor",
+    "docker:pinDigests", "helpers:pinGitHubActionDigests"
+  ],
+  "timezone": "Africa/Cairo",
+  "schedule": ["before 5am on saturday"],
+  "labels": ["dependencies"],
   "customManagers": [{
     "customType": "regex",
     "managerFilePatterns": ["/^Dockerfile$/"],
     "matchStrings": ["# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\nARG \\w*VERSION=(?<currentValue>\\S+)\\nARG \\w+=(?<currentDigest>\\S+)"]
   }],
   "packageRules": [
-    {"matchManagers": ["github-actions", "dockerfile"], "pinDigests": true},
-    {"matchDepNames": ["jloutsch/kfxgen"], "groupName": "kfxgen", "automerge": true}
+    {"matchUpdateTypes": ["minor", "patch", "pin", "digest"], "automerge": true, "minimumReleaseAge": "3 days"},
+    {"matchDepNames": ["jloutsch/kfxgen"], "groupName": "kfxgen"},
+    {"matchDepNames": ["linuxserver/github-workflows"], "overrideDatasource": "github-digest", "versioning": "exact"}
   ]
 }
