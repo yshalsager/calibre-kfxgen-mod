@@ -1,0 +1,12 @@
+{
+  "extends": ["config:recommended"],
+  "customManagers": [{
+    "customType": "regex",
+    "managerFilePatterns": ["/^Dockerfile$/"],
+    "matchStrings": ["# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\nARG \\w*VERSION=(?<currentValue>\\S+)\\nARG \\w+=(?<currentDigest>\\S+)"]
+  }],
+  "packageRules": [
+    {"matchManagers": ["github-actions", "dockerfile"], "pinDigests": true},
+    {"matchDepNames": ["jloutsch/kfxgen"], "groupName": "kfxgen", "automerge": true}
+  ]
+}

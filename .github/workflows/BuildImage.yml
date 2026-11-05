@@ -1,0 +1,39 @@
+name: Build Image
+on:
+  push:
+    branches: [calibre-kfxgen]
+  pull_request:
+    branches: [calibre-kfxgen]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: shellcheck root/etc/s6-overlay/s6-rc.d/init-mod-calibre-kfxgen/run tests/smoke.sh
+      - run: bash tests/smoke.sh
+      - id: version
+        run: echo "version=$(awk -F= '$1 == "ARG MOD_VERSION" {print $2}' Dockerfile)" >> "$GITHUB_OUTPUT"
+  build:
+    needs: test
+    if: github.event_name != 'pull_request'
+    permissions:
+      contents: read
+      packages: write
+    uses: linuxserver/github-workflows/.github/workflows/docker-mod-builder.yml@9928fe6dbf36c145f51011c6dc6b11787a9a2933 # v1
+    secrets:
+      CR_USER: ${{ github.actor }}
+      CR_PAT: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      GITHUB_REPO: yshalsager/calibre-kfxgen-mod
+      ENDPOINT: yshalsager/calibre-kfxgen-mod
+      BASEIMAGE: calibre
+      MODNAME: kfxgen
+      MULTI_ARCH: 'true'
+      MOD_VERSION: ${{ needs.test.outputs.version }}
