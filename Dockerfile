@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
-FROM ghcr.io/linuxserver/baseimage-alpine:3.22@sha256:334f316218c800cf2374258a6e79ba831221a25a04f1ca1c74c993ee38ade354 AS buildstage
+FROM ghcr.io/linuxserver/baseimage-alpine:3.24@sha256:d07ad0eb9e65feb40ded2125e17ad8e1b33228b3cf480567378c8042ef0a8b2d AS buildstage
 # renovate: datasource=github-release-attachments depName=jloutsch/kfxgen
 ARG MOD_VERSION=v5.23.0
 ARG PLUGIN_SHA256=662ac8343feacfa4b39dbc152a74abb8c7432e79526bf8f86a7e8438bd5dca6a
