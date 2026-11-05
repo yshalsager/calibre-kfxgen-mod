@@ -9,10 +9,10 @@ ARG SOURCE_REV=edc2a36680945ad224a49729a0c4387f3e87ce33
 RUN set -eu; version="${MOD_VERSION#v}"; \
     test "$MOD_VERSION" = "$SOURCE_VERSION"; \
     mkdir -p /root-layer/defaults/kfxgen; cd /root-layer/defaults/kfxgen; \
-    curl -fsSL --retry 3 -o plugin.zip \
+    curl -fsSL --retry 5 --retry-max-time 120 -o plugin.zip \
         "https://github.com/jloutsch/kfxgen/releases/download/${MOD_VERSION}/kfxgen-plugin-${version}.zip"; \
     echo "${PLUGIN_SHA256}  plugin.zip" | sha256sum -c -; \
-    curl -fsSL --retry 3 -o source.tar.gz "https://github.com/jloutsch/kfxgen/archive/${SOURCE_REV}.tar.gz"; \
+    curl -fsSL --retry 5 --retry-max-time 120 -o source.tar.gz "https://github.com/jloutsch/kfxgen/archive/${SOURCE_REV}.tar.gz"; \
     tar -xOf source.tar.gz "kfxgen-${SOURCE_REV}/LICENSE" > LICENSE
 COPY root/ /root-layer/
 
