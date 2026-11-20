@@ -26,7 +26,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    uses: linuxserver/github-workflows/.github/workflows/docker-mod-builder.yml@9928fe6dbf36c145f51011c6dc6b11787a9a2933 # v1
+    uses: linuxserver/github-workflows/.github/workflows/docker-mod-builder.yml@39a76e5fdf42ba7f38cac09e4ffe1b0138be2636 # v1
     secrets:
       CR_USER: ${{ github.actor }}
       CR_PAT: ${{ secrets.GITHUB_TOKEN }}
