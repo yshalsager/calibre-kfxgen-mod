@@ -1,11 +1,11 @@
 # syntax=docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
 FROM ghcr.io/linuxserver/baseimage-alpine:3.24@sha256:d07ad0eb9e65feb40ded2125e17ad8e1b33228b3cf480567378c8042ef0a8b2d AS buildstage
 # renovate: datasource=github-release-attachments depName=jloutsch/kfxgen
-ARG MOD_VERSION=v5.23.0
-ARG PLUGIN_SHA256=662ac8343feacfa4b39dbc152a74abb8c7432e79526bf8f86a7e8438bd5dca6a
+ARG MOD_VERSION=v5.24.0
+ARG PLUGIN_SHA256=d3af9398c8984f6afdd7c8623c2713fb2009ab4af7afd59be045ab2eed9aa5fa
 # renovate: datasource=github-releases depName=jloutsch/kfxgen
-ARG SOURCE_VERSION=v5.23.0
-ARG SOURCE_REV=edc2a36680945ad224a49729a0c4387f3e87ce33
+ARG SOURCE_VERSION=v5.24.0
+ARG SOURCE_REV=7bfe173f5427838f1cde8bd31c6f4b11ad43c57e
 RUN set -eu; version="${MOD_VERSION#v}"; \
     test "$MOD_VERSION" = "$SOURCE_VERSION"; \
     mkdir -p /root-layer/defaults/kfxgen; cd /root-layer/defaults/kfxgen; \
